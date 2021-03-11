@@ -14,6 +14,8 @@ public class CloneableClass implements Cloneable{
     }
 
     public CloneableClass clone() throws CloneNotSupportedException {
+        Object ob = new Object();
+
         CloneableClass cc = (CloneableClass) super.clone();
         cc.tmpClass = new TmpClass(cc.tmpClass.a);
         return cc;
