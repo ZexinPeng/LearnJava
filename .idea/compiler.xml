@@ -14,9 +14,9 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="data-structure-and-algorithm" target="1.5" />
-      <module name="leetcode" target="1.5" />
+      <module name="leetcode" target="8" />
       <module name="test" target="1.5" />
-      <module name="testJAVA" target="1.5" />
+      <module name="testJAVA" target="7" />
       <module name="thread" target="1.5" />
     </bytecodeTargetLevel>
   </component>
