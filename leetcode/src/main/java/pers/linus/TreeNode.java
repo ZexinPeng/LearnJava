@@ -31,13 +31,17 @@ public class TreeNode {
         node.val = arr[fatherIndex];
         int leftSon = fatherIndex * 2 + 1;
         if (leftSon < arr.length) {
-            node.left = new TreeNode();
-            insert(node.left, arr, leftSon);
+            if (arr[leftSon] != Integer.MIN_VALUE) {
+                node.left = new TreeNode();
+                insert(node.left, arr, leftSon);
+            }
         }
         int rightSon = (fatherIndex + 1) * 2;
         if (rightSon < arr.length) {
-            node.right = new TreeNode();
-            insert(node.right, arr, rightSon);
+            if (arr[rightSon] != Integer.MIN_VALUE) {
+                node.right = new TreeNode();
+                insert(node.right, arr, rightSon);
+            }
         }
     }
 

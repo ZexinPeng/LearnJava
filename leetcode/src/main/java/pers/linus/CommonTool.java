@@ -20,4 +20,12 @@ public class CommonTool {
         }
         System.out.println(sb.toString());
     }
+
+    public static void printArray(int[] arr) {
+        System.out.print("{ ");
+        for (int num: arr) {
+            System.out.print(num + ", ");
+        }
+        System.out.print("}");
+    }
 }
