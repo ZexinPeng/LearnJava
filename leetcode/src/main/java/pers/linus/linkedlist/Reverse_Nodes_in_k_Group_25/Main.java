@@ -4,6 +4,6 @@ import pers.linus.ListNode;
 
 public class Main {
     public static void main(String[] args) {
-        ListNode.printListNode(new Solution().reverseKGroup(ListNode.convertArray2List(new int[]{1, 2, 3, 4}), 3));
+        ListNode.printListNode(new Solution().reverseKGroup(ListNode.convertArray2List(new int[]{1, 2, 3, 4}), 2));
     }
 }

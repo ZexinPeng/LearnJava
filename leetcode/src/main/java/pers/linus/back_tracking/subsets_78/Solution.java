@@ -40,23 +40,43 @@ public class Solution {
 //        }
 //        return lastIndex + end;
 //    }
-    List<List<Integer>> resList = new LinkedList<List<Integer>>();
+//    List<List<Integer>> resList = new LinkedList<List<Integer>>();
+//    public List<List<Integer>> subsets(int[] nums) {
+//        backTracking(nums, 0, new LinkedList<>());
+//        return resList;
+//    }
+//
+//    private void backTracking(int[] nums, int currentIndex, List<Integer> tmpList) {
+//        if (currentIndex == nums.length - 1) {
+//            tmpList.add(nums[currentIndex]);
+//            resList.add(new LinkedList<>(tmpList));
+//            tmpList.remove(tmpList.size() - 1);
+//            resList.add(new LinkedList<>(tmpList));
+//            return;
+//        }
+//        tmpList.add(nums[currentIndex]);
+//        backTracking(nums, currentIndex + 1, tmpList);
+//        tmpList.remove(tmpList.size() - 1);
+//        backTracking(nums, currentIndex + 1, tmpList);
+//    }
+
+    LinkedList<List<Integer>> resList = new LinkedList<List<Integer>>();
     public List<List<Integer>> subsets(int[] nums) {
-        backTracking(nums, 0, new LinkedList<>());
+        backTracking(nums, new LinkedList<Integer>(), 0);
         return resList;
     }
 
-    private void backTracking(int[] nums, int currentIndex, List<Integer> tmpList) {
-        if (currentIndex == nums.length - 1) {
-            tmpList.add(nums[currentIndex]);
+    private void backTracking(int[] nums, LinkedList<Integer> tmpList, int cur) {
+        if (cur == nums.length - 1) {
+            tmpList.add(nums[cur]);
             resList.add(new LinkedList<>(tmpList));
-            tmpList.remove(tmpList.size() - 1);
+            tmpList.pollLast();
             resList.add(new LinkedList<>(tmpList));
             return;
         }
-        tmpList.add(nums[currentIndex]);
-        backTracking(nums, currentIndex + 1, tmpList);
-        tmpList.remove(tmpList.size() - 1);
-        backTracking(nums, currentIndex + 1, tmpList);
+        tmpList.add(nums[cur]);
+        backTracking(nums, tmpList, cur + 1);
+        tmpList.pollLast();
+        backTracking(nums, tmpList, cur + 1);
     }
 }
