@@ -5,32 +5,34 @@ import java.util.*;
 public class Solution {
     List<List<Integer>> res = new LinkedList<>();
     public List<List<Integer>> permuteUnique(int[] nums) {
-        backTracking(new LinkedList<>(), nums, 0);
+        Map<Integer, Integer> numMap = new HashMap<>();
+        for (int num: nums) {
+            if (numMap.get(num) != null) {
+                numMap.put(num, numMap.get(num) + 1);
+            } else {
+                numMap.put(num, 1);
+            }
+        }
+        backTracking(new LinkedList<>(), numMap, nums.length);
         return res;
     }
 
-    private void backTracking(List<Integer> tmpList, int[] nums, int cur) {
-        if (cur == nums.length - 1) {
-            tmpList.add(nums[cur]);
-            res.add(new LinkedList<>(tmpList));
-            tmpList.remove(tmpList.size() - 1);
+    private void backTracking(LinkedList<Integer> list, Map<Integer, Integer> numMap, int size) {
+        if (list.size() == size) {
+            res.add(new LinkedList<>(list));
             return;
         }
-        Set<Integer> set = new HashSet<Integer>();
-        for (int i = cur; i < nums.length; i++) {
-            if (set.add(nums[i])) {
-                swap(nums, cur, i);
-                tmpList.add(nums[cur]);
-                backTracking(tmpList, nums, cur + 1);
-                tmpList.remove(tmpList.size() - 1);
-                swap(nums, cur, i);
+        for (Map.Entry<Integer, Integer> entry : numMap.entrySet()) {
+            int key = entry.getKey();
+            int value = entry.getValue();
+            if (value == 0) {
+                continue;
             }
+            list.addLast(key);
+            numMap.put(key, value - 1);
+            backTracking(list, numMap, size);
+            list.removeLast();
+            numMap.put(key, value);
         }
-    }
-
-    private void swap(int[] nums, int i, int j) {
-        int tmp = nums[i];
-        nums[i] = nums[j];
-        nums[j] = tmp;
     }
 }

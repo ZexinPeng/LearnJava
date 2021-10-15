@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        List<List<Integer>> res = new Solution().permuteUnique(new int[]{1, 2, 3});
+        List<List<Integer>> res = new Solution().permuteUnique(new int[]{1, 1, 3});
         for (int i = 0; i < res.size(); i++) {
             CommonTool.printIntegerList(res.get(i));
         }
