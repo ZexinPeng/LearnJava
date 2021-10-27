@@ -28,4 +28,10 @@ public class CommonTool {
         }
         System.out.print("}");
     }
+
+    public static void swap(int i, int j, int[] arr) {
+        int tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
+    }
 }
