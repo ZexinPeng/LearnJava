@@ -3,33 +3,36 @@ package pers.linus.stack.daily_temperatures_739;
 import java.util.Stack;
 
 public class Solution {
-    public int[] dailyTemperatures(int[] T) {
-        Stack<int[]> stack = new Stack<int[]>();
-        for (int i = 0; i < T.length; i++) {
-            if (stack.size() == 0) {
-                stack.push(new int[]{T[i], i});
-                continue;
-            }
-            // int[0] 代表数值， int[1]代表索引
-            int[] tmp = stack.peek();
-            if (T[i] <= tmp[0]) {
-                stack.push(new int[]{T[i], i});
-                continue;
-            }
-            while (T[i] > tmp[0]) {
-                T[tmp[1]] = i - tmp[1];
-                stack.pop();
-                if (stack.size() == 0) {
-                    break;
+    public static void main(String[] args) {
+        int[] nums = new int[]{77,77,77,77,77,41,77,41,41,77};
+//        int[] nums = new int[]{76, 75, 74, 73};
+        nums = new Solution().dailyTemperatures(nums);
+    }
+
+    public int[] dailyTemperatures(int[] temperatures) {
+        Stack<int[]> stack = new Stack();
+        for (int i = 0; i < temperatures.length - 1; i++) {
+            int record = temperatures[i];
+            if (temperatures[i] < temperatures[i + 1]) {
+                temperatures[i] = 1;
+            } else {
+                while (!stack.isEmpty() && record > stack.peek()[0]) {
+                    int index = stack.pop()[1];
+                    temperatures[index] = i - index;
                 }
-                tmp = stack.peek();
+                stack.push(new int[]{temperatures[i], i});
+                temperatures[i] = 0;
             }
-            stack.push(new int[]{T[i], i});
+            while (!stack.isEmpty() && record > stack.peek()[0]) {
+                int index = stack.pop()[1];
+                temperatures[index] = i - index;
+            }
         }
-        while (stack.size() > 0) {
-            int[] tmp = stack.pop();
-            T[tmp[1]] = 0;
+        while (!stack.isEmpty() &&  temperatures[temperatures.length - 1] > stack.peek()[0]) {
+            int index = stack.pop()[1];
+            temperatures[index] = temperatures.length - 1 - index;
         }
-        return T;
+        temperatures[temperatures.length - 1] = 0;
+        return temperatures;
     }
 }
