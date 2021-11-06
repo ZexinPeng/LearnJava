@@ -5,13 +5,15 @@ import pers.linus.TreeNode;
 
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Solution {
     public static void main(String[] args) {
         int[] treeArray = new int[]{'a', 'b', 'c', 'd', 'e', 'f', 'g'};
         TreeNode root = TreeNode.convertArray2BinaryTree(treeArray);
         System.out.println(new Solution().smallestFromLeaf(root));
-        LinkedList<Integer> list = new LinkedList<>();
+        List<Integer> list = new LinkedList<>();
+
     }
     String res = null;
 
