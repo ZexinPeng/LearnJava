@@ -5,39 +5,35 @@ public class QuickSort implements Sort{
         quickSort(arr, 0, arr.length - 1);
     }
 
-    private void quickSort(int[] arr, int first, int last) {
-        if (first >= last) {
+    private void quickSort(int[] nums, int left, int right) {
+        if (left >= right) {
             return;
         }
-
-        int base = first;
-        int left = first, right = last;
-        int tmp;
-
-        while (left < right) {
-            if (arr[right] < arr[base]) {
-                while (left < right) {
-                    if (arr[left] > arr[base]) {
-                        tmp = arr[left];
-                        arr[left] = arr[right];
-                        arr[right] = tmp;
+        int l = left;
+        int r = right;
+        int pivot = left;
+        while (l < r) {
+            if (nums[r] < nums[pivot]) {
+                swap(nums, pivot, r);
+                pivot = r;
+                while (l < r) {
+                    if (nums[l] > nums[pivot]) {
+                        swap(nums, pivot, l);
+                        pivot = l;
                         break;
                     }
-                    else {
-                        left++;
-                    }
+                    l++;
                 }
             }
-            else {
-                right--;
-            }
+            r--;
         }
-        if (left != base) {
-            tmp = arr[base];
-            arr[base] = arr[left];
-            arr[left] = tmp;
-        }
-        quickSort(arr, first, left - 1);
-        quickSort(arr, left + 1, last);
+        quickSort(nums, left, l - 1);
+        quickSort(nums, l + 1, right);
+    }
+
+    private void swap(int[] nums, int i, int j) {
+        int tmp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = tmp;
     }
 }

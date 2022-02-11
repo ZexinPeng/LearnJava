@@ -3,39 +3,35 @@ package pers.linus.sort;
 public class MergeSort implements Sort{
     public void sort(int[] arr) {
         int[] tmpArr = new int[arr.length];
-        mergeSort(arr, tmpArr, 0, arr.length - 1);
+        mergeSort(arr, 0, arr.length - 1);
     }
 
-    private void mergeSort(int[] arr, int[] tmpArr, int first, int end) {
-        if (first < end) {
-            int mid = (first + end) / 2;
-            mergeSort(arr, tmpArr, first, mid);
-            mergeSort(arr, tmpArr, mid + 1, end);
-            merge(arr, tmpArr, first, end);
+    private void mergeSort(int[] nums, int left, int right) {
+        if (left >= right) {
+            return;
         }
-    }
-
-    private void merge(int[] arr, int[] tmpArr, int first, int end) {
-        int mid = (first + end) / 2;
-        int arr1Current = first;
-        int arr2Current = mid + 1;
-        int tmpCurrent = first;
-        while (arr1Current <= mid && arr2Current<= end) {
-            if (arr[arr1Current] <= arr[arr2Current]) {
-                tmpArr[tmpCurrent++] = arr[arr1Current++];
-            }
-            else {
-                tmpArr[tmpCurrent++] = arr[arr2Current++];
+        int mid = left + (right - left) / 2;
+        mergeSort(nums, left, mid);
+        mergeSort(nums, mid + 1, right);
+        int[] arr = new int[right - left + 1];
+        int i = left;
+        int j = mid + 1;
+        int index = 0;
+        while (i <= mid && j <= right) {
+            if (nums[i] < nums[j]) {
+                arr[index++] = nums[i++];
+            } else {
+                arr[index++] = nums[j++];
             }
         }
-        while (arr1Current <= mid) {
-            tmpArr[tmpCurrent++] = arr[arr1Current++];
+        while (i <= mid) {
+            arr[index++] = nums[i++];
         }
-        while (arr2Current <= end) {
-            tmpArr[tmpCurrent++] = arr[arr2Current++];
+        while (j <= right) {
+            arr[index++] = nums[j++];
         }
-        for (int i = first; i <= end; i++) {
-            arr[i] = tmpArr[i];
+        for (index = 0; index < arr.length; index++) {
+            nums[left + index] = arr[index];
         }
     }
 }
